@@ -43,7 +43,3 @@ async def book_transport():
 @app.get("/transport/status")
 async def transport_status():
     return {"agent": "Transport Booking Agent", "status": "Delivery in progress"}
-
-@app.get("/transport/status")
-async def transport_status():
-    return {"agent": "Transport Booking Agent", "status": "Delivery in progress"}
