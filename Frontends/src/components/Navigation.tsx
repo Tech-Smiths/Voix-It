@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { ShoppingBag, Home, Plus, Package, Share } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { Home, Plus, Package, Share, Mic2 } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ const Navigation: React.FC = () => {
     { path: '/', icon: Home, label: t('home') },
     { path: '/add-product', icon: Plus, label: t('addProduct') },
     { path: '/catalog', icon: Package, label: t('catalog') },
+    { path: '/flipkart', icon: ShoppingBag, label: 'Flipkart' }, // 👈 New Flipkart Button
     { path: '/share', icon: Share, label: t('share') }
   ];
 
