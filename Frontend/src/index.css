@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Voix'it Design System - Warm, accessible colors for rural sellers */
+
+@layer base {
+  :root {
+    /* Warm earthy background palette */
+    --background: 42 15% 97%;
+    --foreground: 25 25% 15%;
+
+    /* Card surfaces with subtle warmth */
+    --card: 42 25% 99%;
+    --card-foreground: 25 25% 15%;
+
+    /* Popover elements */
+    --popover: 42 25% 99%;
+    --popover-foreground: 25 25% 15%;
+
+    /* Primary - Warm green for agricultural feel */
+    --primary: 142 70% 45%;
+    --primary-foreground: 42 25% 99%;
+    --primary-glow: 142 70% 65%;
+
+    /* Secondary - Warm earth tone */
+    --secondary: 30 40% 92%;
+    --secondary-foreground: 25 25% 25%;
+
+    /* Muted elements */
+    --muted: 30 25% 90%;
+    --muted-foreground: 25 15% 45%;
+
+    /* Accent - Vibrant orange for CTAs */
+    --accent: 25 85% 60%;
+    --accent-foreground: 42 25% 99%;
+
+    /* Voice/AI specific colors */
+    --voice-primary: 250 75% 60%;
+    --voice-secondary: 280 65% 70%;
+    --ai-accent: 200 85% 55%;
+
+    /* Status colors */
+    --success: 142 70% 45%;
+    --warning: 45 90% 55%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 42 25% 99%;
+
+    /* Interactive elements */
+    --border: 30 20% 85%;
+    --input: 30 20% 88%;
+    --ring: 142 70% 45%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-voice: linear-gradient(135deg, hsl(var(--voice-primary)), hsl(var(--voice-secondary)));
+    --gradient-warm: linear-gradient(180deg, hsl(var(--background)), hsl(30 20% 94%));
+    --gradient-card: linear-gradient(135deg, hsl(var(--card)), hsl(30 15% 96%));
+
+    /* Shadows */
+    --shadow-warm: 0 4px 20px hsl(var(--primary) / 0.15);
+    --shadow-voice: 0 8px 32px hsl(var(--voice-primary) / 0.25);
+    --shadow-card: 0 2px 12px hsl(25 25% 15% / 0.08);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-glow: 210 40% 90%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --voice-primary: 250 75% 60%;
+    --voice-secondary: 280 65% 70%;
+    --ai-accent: 200 85% 55%;
+
+    --success: 142 70% 45%;
+    --warning: 45 90% 55%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-voice: linear-gradient(135deg, hsl(var(--voice-primary)), hsl(var(--voice-secondary)));
+    --gradient-warm: linear-gradient(180deg, hsl(var(--background)), hsl(220 15% 8%));
+    --gradient-card: linear-gradient(135deg, hsl(var(--card)), hsl(220 20% 6%));
+
+    /* Dark mode shadows */
+    --shadow-warm: 0 4px 20px hsl(var(--primary) / 0.25);
+    --shadow-voice: 0 8px 32px hsl(var(--voice-primary) / 0.35);
+    --shadow-card: 0 2px 12px hsl(0 0% 0% / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
