@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class TextInput(BaseModel):
     input_text: str
@@ -18,3 +19,5 @@ class DeliveryRequest(BaseModel):
     pickup: str
     drop: str
     product: str
+    weight: Optional[str] = None
+    delivery_mode: Optional[str] = "Standard"
