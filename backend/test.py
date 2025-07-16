@@ -1,52 +1,80 @@
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
 import requests
 import json
+import time
 
-router = APIRouter()
+# --- CONFIG ---
+TRIGGER_URL = "https://api-d7b62b.stack.tryrelevance.com/latest/agents/trigger"
+JOB_STATUS_URL = "https://api-d7b62b.stack.tryrelevance.com/latest/jobs"
 
-# Relevance AI Config
-RELEVANCE_API_KEY = "f7750841-ca18-4c52-92e7-14d683e77694:sk-MTU2NGJkYTgtMGU0Ny00MzY2LThhODItM2NlZjliYjk3NTI5"
-RELEVANCE_AGENT_ID = "814a7e83-63de-42c6-9c7c-cfa0e64f381f"
-RELEVANCE_API_URL = "https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger"
+API_KEY = "60e95ba1-c4fe-4fd4-bcd2-58e80255a800:sk-ZjE3ZDc1MDUtZTA5Ny00OTEwLWI1YzItZDFjY2MxNTM1Mjk2"
+AGENT_ID = "1eb15459-5026-4bf2-89c0-10eb845b96e9"
 
-# --- Input Model ---
-class VoiceInput(BaseModel):
-    message: str
+HEADERS = {
+    "Content-Type": "application/json",
+    "Authorization": API_KEY
+}
 
-# --- Endpoint ---
-@router.post("/catalog")
-async def get_catalog_data(input_data: VoiceInput):
-    try:
-        payload = {
-            "message": {
-                "role": "user",
-                "content": input_data.message
-            },
-            "agent_id": RELEVANCE_AGENT_ID
-        }
+# --- INPUT ---
+user_input = "10kg onion for 50 rupees per kg"
+payload = {
+    "message": {
+        "role": "user",
+        "content": user_input
+    },
+    "agent_id": AGENT_ID
+}
 
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": RELEVANCE_API_KEY
-        }
+# --- STEP 1: Trigger Agent ---
+print("🚀 Sending request to Relevance Agent...")
+response = requests.post(TRIGGER_URL, headers=HEADERS, data=json.dumps(payload))
+print("🔁 Status Code:", response.status_code)
 
-        response = requests.post(RELEVANCE_API_URL, headers=headers, data=json.dumps(payload))
+res_json = response.json()
 
-        if response.status_code == 200:
-            result = response.json()
+# --- STEP 2: Extract job_id ---
+job_id = res_json.get("job_info", {}).get("job_id")
+if not job_id:
+    print("❌ No job ID found. Cannot proceed.")
+    print("Response:", res_json)
+    exit()
 
-            # Extract the assistant response
-            if "message" in result and "content" in result["message"]:
-                try:
-                    content = json.loads(result["message"]["content"])
-                    return content
-                except json.JSONDecodeError:
-                    raise HTTPException(status_code=500, detail="Agent response not in JSON format")
-            else:
-                raise HTTPException(status_code=500, detail="Unexpected agent response format")
+print(f"⏳ Job queued. Job ID: {job_id}")
+
+# --- STEP 3: Poll for Result ---
+MAX_WAIT = 100  # seconds
+POLL_INTERVAL = 10  # seconds
+elapsed = 0
+
+while elapsed < MAX_WAIT:
+    print(f"🔎 Checking job status... ({elapsed}s)")
+    job_response = requests.get(f"{JOB_STATUS_URL}/{job_id}", headers=HEADERS)
+
+    if job_response.status_code == 200:
+        job_data = job_response.json()
+        state = job_data.get("state")
+
+        if state == "completed":
+            try:
+                content = json.loads(job_data["outputs"]["message"]["content"])
+                print("\n✅ Final Agent Output:")
+                print(json.dumps(content, indent=2))
+                break
+            except Exception as e:
+                print("⚠️ Agent completed but output parsing failed:", str(e))
+                print("Raw:", job_data)
+                break
+
+        elif state in ["failed", "errored"]:
+            print(f"❌ Job failed with state: {state}")
+            break
+
         else:
-            raise HTTPException(status_code=response.status_code, detail="Agent call failed")
+            print(f"🟡 Job still running... (state: {state})")
+    else:
+        print("❌ Failed to fetch job status:", job_response.text)
 
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    time.sleep(POLL_INTERVAL)
+    elapsed += POLL_INTERVAL
+
+else:
+    print("❌ Timed out waiting for agent output after 100 seconds.")
