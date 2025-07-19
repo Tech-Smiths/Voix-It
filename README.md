@@ -65,8 +65,11 @@ Millions of rural sellers in India struggle to bring their products online due t
 | 🌍 Deployment| Render (API) + Firebase Hosting (Frontend) |
 
 ---
-[<img width="3508" height="2479" alt="image" src="https://github.com/user-attachments/assets/eaaba49a-ba4d-4ddf-9898-10bbef8e5133" />](https://voix-it.onrender.com/)
 
+📊 System Architecture
+[<img width="1026" alt="image" src="https://github.com/user-attachments/assets/eaaba49a-ba4d-4ddf-9898-10bbef8e5133" />](https://voix-it.onrender.com/)
+
+---
 
 ## 🔁 Multi-Agent Architecture (Modular)
 
@@ -99,6 +102,11 @@ Millions of rural sellers in India struggle to bring their products online due t
 
 ---
 
+## 🛠️ Work-in-Progress Wireframe
+<img width="1026" height="578" alt="image" src="https://github.com/user-attachments/assets/01cedd82-06a8-4ce5-942f-aa61918f1733" />
+
+---
+
 ## 🧠 Future Scope
 
 - 💱 Integrate ONDC, Flipkart, Amazon APIs for real listing
@@ -112,7 +120,7 @@ Millions of rural sellers in India struggle to bring their products online due t
 ## 📚 Documentation
 - [API Documentation (FastAPI Swagger)](https://voix-it.onrender.com/)
 - [PPT Presentation](https://gamma.app/docs/Voixit-The-Rural-Seller-Companion-System-d05f7wb2fyfn4e4?mode=doc)
-
+- [Documentation](https://drive.google.com/file/d/1_1RxWv4z3O0U6hxo6Ncl6TuVSLSPy7hS/view?usp=sharing)
 ---
 
 ## ⚡ Team Tech Smiths
