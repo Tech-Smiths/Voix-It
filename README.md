@@ -66,8 +66,8 @@ Millions of rural sellers in India struggle to bring their products online due t
 
 ---
 
-📊 System Architecture
-[<img width="1026" alt="image" src="https://github.com/user-attachments/assets/eaaba49a-ba4d-4ddf-9898-10bbef8e5133" />](https://voix-it.onrender.com/)
+## 📊 System Architecture
+<img width="1026"  alt="image" src="https://github.com/user-attachments/assets/caa15018-f7ea-4cbc-b480-fa4f7d5de558" />
 
 ---
 
@@ -125,7 +125,7 @@ Millions of rural sellers in India struggle to bring their products online due t
 
 ## ⚡ Team Tech Smiths
 
-- **Riyaz** – Backend + LLM Agent Integrator  
+- **Mohamed Riyaz Ahamed** – Backend + LLM Agent Integrator  
 - **Ajmal** – Prompt Engineer + System Architect  
 - **Nihal** – Frontend Developer + UI Flow  
 - **Umar** – Documentation + GitHub Manager + PPT Lead  
